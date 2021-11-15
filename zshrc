@@ -1,17 +1,28 @@
 ZSH=$HOME/.oh-my-zsh
 
 # You can change the theme with another one from https://github.com/robbyrussell/oh-my-zsh/wiki/themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="cobalt2"
+# DEFAULT_USER="ninahackenbroich"
 
 # Useful oh-my-zsh plugins for Le Wagon bootcamps
-plugins=(git gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search)
+plugins=(git gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search ssh-agent docker docker-compose)
 
 # (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
+ZSH_DISABLE_COMPFIX=true
+
+# Include Z
+. ~/z.sh
 
 # Actually load Oh-My-Zsh
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
+
+alias windows='cd /mnt/c/Users/Ninja/'
+
+flutter() {
+    command CMD.exe /c flutter $@
+}
 
 # Load rbenv if installed (To manage your Ruby versions)
 export PATH="${HOME}/.rbenv/bin:${PATH}" # Needed for Linux/WSL
@@ -44,3 +55,23 @@ export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
+export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
+sudo /etc/init.d/postgresql start
+cd ~/code/ninahackenbroich
+
+
+# JDK
+if [[ -e /usr/lib/jvm/java-8-openjdk-amd64 ]]; then
+  export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+  export PATH="$PATH:$JAVA_HOME/bin"
+fi
+# Android tools
+if [[ -e $HOME/android-sdk-tools ]]; then
+    export PATH="$HOME/android-sdk-tools:$HOME/android-sdk-tools/bin:$PATH"
+    export PATH="$HOME/.android/platform-tools:$PATH"
+    export ANDROID_HOME="$HOME/.android"
+    export ANDROID_SDK_ROOT="$HOME/.android"
+    export REPO_OS_OVERRIDE="linux"
+    adb kill-server 2> /dev/null
+    export ADB_SERVER_SOCKET=tcp:$(cat /etc/resolv.conf | grep nameserver | cut -d' ' -f2):5037
+fi
