@@ -4,3 +4,27 @@ alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/m
 
 # Quickly serve the current directory as HTTP
 alias serve='ruby -run -e httpd . -p 8000' # Or python -m SimpleHTTPServer :)
+# NOTE: On Q3 2021, Le Wagon decided to change the Web Dev curriculum default text editor
+alias stt="echo 'Launching VS Code instead of Sublime Text... (cf ~/.aliases)' && code ."
+# Standard
+alias ybw='yarn build --watch'
+alias ry='rails s && yarn build --watch'
+alias gaa='git add .'
+alias gcm='git commit -m'
+alias gpl='git pull'
+alias gps='git push'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gbr='git branch'
+alias gdf='git diff'
+alias gst='git status'
+alias gcl='git clone'
+alias gac='git add . && git commit -m'
+alias node18='export PATH="/usr/local/opt/node@18/bin:$PATH"'
+
+
+g() {
+    if [ "$1" = "co" ]; then
+        git checkout "${@:2}"
+    fi
+}
